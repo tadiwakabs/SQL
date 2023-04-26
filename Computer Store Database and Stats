@@ -1,0 +1,35 @@
+--Create a tech store database (Macrocenter)
+CREATE TABLE macrocenter
+(id INTEGER PRIMARY KEY, item_name TEXT, price INTEGER, inventory INTEGER, item_type TEXT); 
+
+INSERT INTO macrocenter VALUES 
+(1,"TK150",50,40,"Graphics Card"),
+(2,"TK160",80,76,"Graphics Card"),
+(3,"TK170",120,92,"Graphics Card"),
+(4,"TK180",180,49,"Graphics Card"),
+(5,"TK190",300,17,"Graphics Card"),
+(6,"2400T",60,192,"Processor"),
+(7,"2600T",90,153,"Processor"),
+(8,"2800T",150,79,"Processor"),
+(9,"Dominance 16GB",40,211,"RAM"),
+(10,"Dominance 32GB",75,328,"RAM"),
+(11,"Dominance 64GB",140,136,"RAM"),
+(12,"TNY 1TB HDD",20,452,"Storage"),
+(13,"TNY 2TB HDD",35,621,"Storage"),
+(14,"TNY 2TB SSD",60,328,"Storage"),
+(15,"TNY 4TB SSD",115,210,"Storage");
+
+-- View whole database
+SELECT * FROM macrocenter;
+
+-- Sort all items in store by price lowest to highest
+SELECT * FROM macrocenter 
+ORDER BY price ASC;
+
+--Estimate total revenue based on current inventory
+SELECT SUM(price*inventory) FROM macrocenter;
+
+-- Show the top 5 most expensive items in the store
+SELECT item_name, price FROM macrocenter 
+ORDER BY price DESC 
+LIMIT 5;
