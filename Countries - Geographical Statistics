@@ -1,0 +1,48 @@
+-- Countries and dependent territories, 2020
+   Data adapted from
+   http://www.worldometers.info/world-population/population-by-country/
+   Does not include rows which had "N.A." values, so some territories are missing.
+
+CREATE TABLE countries(
+   name                    TEXT PRIMARY KEY,
+   population              INTEGER,
+   percent_one_year_change REAL,
+   population_change       INTEGER,
+   density_per_sq_km       INTEGER,
+   area_sq_km              INTEGER,
+   net_migrants            INTEGER,
+   fertility_rate          REAL,
+   median_age              REAL,
+   percent_of_world_pop    REAL
+);
+
+-- Which country has the largest population?
+SELECT name,MAX(Population) AS Population FROM countries;
+
+-- Which country has the smallest population?
+SELECT name,MIN(Population) AS Population FROM countries;
+
+-- What is the average population?
+SELECT ROUND(AVG(Population)) AS Average_Population FROM countries;
+
+-- What is the average fertility rate?
+SELECT AVG(fertility_rate) AS average_fertility_rate FROM countries;
+
+-- List the countries in order by increasing population density.
+SELECT name,(Population/area_sq_km)AS population_density FROM countries 
+  GROUP BY population_density; 
+
+-- Which countries with a high population have a low migration rate?
+SELECT name,net_migrants,percent_of_world_pop FROM countries 
+  GROUP BY net_migrants 
+  HAVING percent_of_world_pop>1 AND net_migrants<100000;
+
+-- Display a list of how many countries have a ageing, working or booming population.
+SELECT COUNT(*),
+  CASE
+    WHEN median_age>45 THEN"Ageing Population"
+    WHEN median_age>25 THEN "Working Population"
+    ELSE "Booming Population"
+  END AS "population_type"
+FROM countries
+GROUP BY population_type;
