@@ -1,0 +1,23 @@
+-- Create a player database for Overwatch
+CREATE TABLE owplayerdata(
+id INTEGER PRIMARY KEY,
+username TEXT,
+level INTEGER,
+rank TEXT
+);
+
+INSERT INTO owplayerdata(username,level,rank) VALUES ("tadzz", 536, "GM4");
+INSERT INTO owplayerdata(username,level,rank) VALUES ("calawity", 157, "D5");
+INSERT INTO owplayerdata(username,level,rank) VALUES ("sorn", 24, "Unranked");
+INSERT INTO owplayerdata(username,level,rank) VALUES ("nobodystill", 403, "S2");
+
+-- Display contents of database.
+SELECT * FROM owplayerdata;
+
+-- Update a player's rank and display the database with the new rank.
+UPDATE owplayerdata SET rank="P1" WHERE id=3;
+SELECT * FROM owplayerdata;
+
+-- A player had their account deleted. Delete the row containing their data.
+DELETE FROM owplayerdata WHERE id=2;
+SELECT * FROM owplayerdata;
