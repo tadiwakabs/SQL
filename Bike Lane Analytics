@@ -79,7 +79,7 @@ WHERE rating >=4.0;
 
 --Using Window Functions output the average safety rating for each street, and leave a recommendation for each one based on their safety rating.
 SELECT street, safetyrating,
-AVG(safetyrating) OVER (PARTITION BY street) as "average_safety_rating",
+AVG(safetyrating) OVER (PARTITION BY street) AS "average_safety_rating",
 CASE
     WHEN AVG(safetyrating) OVER (PARTITION BY street) >= 4 THEN "Leave As Is."
     WHEN AVG(safetyrating) OVER (PARTITION BY street) >= 2.5 THEN "Improvements are Needed."
